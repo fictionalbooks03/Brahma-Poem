@@ -3,15 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brahma — Scroll Poem with Audio</title>
+<title>Brahma — Scroll Poem with Glowing Lotus</title>
 <style>
   body {
     margin: 0;
     padding: 0;
+    font-family: "Georgia", serif;
+    height: 500vh; /* enough height for scrolling */
     background-color: #0d0d0d;
     color: #f2f2f2;
-    font-family: "Georgia", serif;
-    height: 500vh; /* enough height to allow scrolling */
+  }
+
+  /* Lotus background with glow animation */
+  body::before {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 400px;
+    background-image: url('https://i.imgur.com/Zg3lGZK.png'); /* lotus image */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.6;
+    filter: drop-shadow(0 0 20px #ffb6c1);
+    animation: glow 3s ease-in-out infinite alternate;
+    z-index: -1;
+  }
+
+  @keyframes glow {
+    0% { opacity: 0.5; filter: drop-shadow(0 0 10px #ffb6c1); }
+    50% { opacity: 0.8; filter: drop-shadow(0 0 30px #ff69b4); }
+    100% { opacity: 0.6; filter: drop-shadow(0 0 20px #ffb6c1); }
   }
 
   .poem-container {
@@ -47,12 +72,6 @@
 </style>
 </head>
 <body>
-
-<!-- Audio -->
-<audio id="poem-audio">
-  <source src="New%20Recording%2016.m4a" type="audio/mp4">
-  Your browser does not support the audio element.
-</audio>
 
 <div class="poem-container">
   <h2>Brahma — Ralph Waldo Emerson</h2>
@@ -90,24 +109,16 @@
 
     const index = Math.min(
       numLines - 1,
-      Math.floor(scrollFraction * numLines * 1.2) // controls speed of line changes
+      Math.floor(scrollFraction * numLines * 1.2)
     );
 
     lines.forEach((line, i) => {
       line.classList.toggle('visible', i === index);
     });
   });
-
-  // Play audio on first click anywhere
-  let played = false;
-  document.addEventListener('click', () => {
-    if (!played) {
-      document.getElementById('poem-audio').play();
-      played = true;
-    }
-  }, { once: true });
 </script>
 
 </body>
 </html>
+
 
