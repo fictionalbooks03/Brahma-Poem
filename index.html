@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<audio id="poem-audio">
+<source src="New%20Recording%2016.m4a" type="audio/mp4">
+Your browser does not support the audio element.
+</audio>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brahma — Scroll Poem</title>
 <style>
+<script>
+  let played = false;
+  document.addEventListener('click', () => {
+    if (!played) {
+      document.getElementById('poem-audio').play();
+      played = true;
+    }
+  }, { once: true });
+</script>
   body {
     margin: 0;
     padding: 0;
