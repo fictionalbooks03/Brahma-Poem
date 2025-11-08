@@ -1,30 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<audio id="poem-audio">
-<source src="New%20Recording%2016.m4a" type="audio/mp4">
-Your browser does not support the audio element.
-</audio>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brahma — Scroll Poem</title>
+<title>Brahma — Scroll Poem with Audio</title>
 <style>
-<script>
-  let played = false;
-  document.addEventListener('click', () => {
-    if (!played) {
-      document.getElementById('poem-audio').play();
-      played = true;
-    }
-  }, { once: true });
-</script>
   body {
     margin: 0;
     padding: 0;
     background-color: #0d0d0d;
     color: #f2f2f2;
     font-family: "Georgia", serif;
-    height: 500vh; /* allows scrolling */
+    height: 500vh; /* enough height to allow scrolling */
   }
 
   .poem-container {
@@ -61,6 +48,12 @@ Your browser does not support the audio element.
 </head>
 <body>
 
+<!-- Audio -->
+<audio id="poem-audio">
+  <source src="New%20Recording%2016.m4a" type="audio/mp4">
+  Your browser does not support the audio element.
+</audio>
+
 <div class="poem-container">
   <h2>Brahma — Ralph Waldo Emerson</h2>
 
@@ -86,6 +79,7 @@ Your browser does not support the audio element.
 </div>
 
 <script>
+  // Scroll-triggered poem lines
   const lines = document.querySelectorAll('.line');
   const numLines = lines.length;
 
@@ -96,14 +90,24 @@ Your browser does not support the audio element.
 
     const index = Math.min(
       numLines - 1,
-      Math.floor(scrollFraction * numLines * 1.2) // adjust speed
+      Math.floor(scrollFraction * numLines * 1.2) // controls speed of line changes
     );
 
     lines.forEach((line, i) => {
       line.classList.toggle('visible', i === index);
     });
   });
+
+  // Play audio on first click anywhere
+  let played = false;
+  document.addEventListener('click', () => {
+    if (!played) {
+      document.getElementById('poem-audio').play();
+      played = true;
+    }
+  }, { once: true });
 </script>
 
 </body>
 </html>
+
