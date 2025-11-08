@@ -12,6 +12,7 @@
     height: 500vh; /* enough height for scrolling */
     background-color: #0d0d0d;
     color: #f2f2f2;
+    overflow-x: hidden;
   }
 
   /* Lotus background with glow animation */
@@ -23,7 +24,7 @@
     transform: translateX(-50%);
     width: 400px;
     height: 400px;
-    background-image: url('lotus.jpg'); /* make sure lotus.jpg is uploaded */
+    background-image: url('lotus.jpg'); /* your uploaded lotus image */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -123,14 +124,12 @@
     });
   });
 
-  // Play OM audio on first click
-  let audioPlayed = false;
-  document.addEventListener('click', () => {
-    if (!audioPlayed) {
-      document.getElementById('background-audio').play();
-      audioPlayed = true;
-    }
-  }, { once: true });
+  // Play OM audio on first click (works on GitHub Pages)
+  document.addEventListener('click', function playOnce() {
+    const audio = document.getElementById('background-audio');
+    audio.play().catch(err => console.log('Autoplay blocked until click:', err));
+    document.removeEventListener('click', playOnce);
+  });
 </script>
 
 </body>
