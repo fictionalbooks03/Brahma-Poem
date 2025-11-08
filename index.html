@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brahma — Scroll Poem with Glowing Lotus</title>
+<title>Brahma — Scroll Poem with Glowing Lotus and OM</title>
 <style>
   body {
     margin: 0;
@@ -23,7 +23,7 @@
     transform: translateX(-50%);
     width: 400px;
     height: 400px;
-    background-image: url('lotus.jpg'); /* your uploaded lotus image */
+    background-image: url('lotus.jpg'); /* make sure lotus.jpg is uploaded */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -73,6 +73,12 @@
 </head>
 <body>
 
+<!-- Background OM audio -->
+<audio id="background-audio" loop>
+  <source src="om.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
 <div class="poem-container">
   <h2>Brahma — Ralph Waldo Emerson</h2>
 
@@ -116,8 +122,16 @@
       line.classList.toggle('visible', i === index);
     });
   });
+
+  // Play OM audio on first click
+  let audioPlayed = false;
+  document.addEventListener('click', () => {
+    if (!audioPlayed) {
+      document.getElementById('background-audio').play();
+      audioPlayed = true;
+    }
+  }, { once: true });
 </script>
 
 </body>
 </html>
-
